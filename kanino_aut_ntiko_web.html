@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanino Auténtiko | Ropa con estilo para tu mascota</title>
+    
+    <!-- Tipografía Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Iconos Phosphor (Diseño minimalista) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind CSS (Para Flat Design y Responsividad) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FBFBFB',
+                        secondary: '#E2F0D9',
+                        tertiary: '#E8DEF8',
+                        neutral: '#FFDCD0',
+                        textDark: '#2C3E50', /* Color de texto suave pero legible */
+                        textLight: '#596978'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'soft-lg': '0 10px 25px -3px rgba(0, 0, 0, 0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos personalizados para el menú fluido */
+        #mobile-menu {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+            padding-bottom: 1rem;
+        }
+
+        /* Utilidad para ocultar scrollbar en elementos horizontales */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-primary font-sans text-textDark antialiased pt-20">
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav class="bg-primary shadow-soft fixed w-full top-0 left-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#inicio" class="text-2xl font-bold text-textDark flex items-center gap-2">
+                        <i class="ph-fill ph-paw-print text-tertiary text-3xl"></i>
+                        Kanino Auténtiko
+                    </a>
+                </div>
+                
+                <!-- Menú Desktop -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#inicio" class="text-textLight hover:text-textDark font-medium transition-colors">Inicio</a>
+                    <a href="#novedades" class="text-textLight hover:text-textDark font-medium transition-colors">Novedades</a>
+                    <a href="#productos" class="text-textLight hover:text-textDark font-medium transition-colors">Productos</a>
+                    <a href="#nosotros" class="text-textLight hover:text-textDark font-medium transition-colors">Nosotros</a>
+                    <a href="#contacto" class="text-textLight hover:text-textDark font-medium transition-colors">Contacto</a>
+                    
+                    <!-- Botón Carrito -->
+                    <a href="#carrito" class="bg-secondary text-textDark p-3 rounded-full hover:shadow-soft transition-all" aria-label="Carrito de compras" onclick="abrirMensaje('Carrito')">
+                        <i class="ph ph-shopping-cart text-xl"></i>
+                    </a>
+                </div>
+
+                <!-- Botón Menú Hamburguesa (Mobile) -->
+                <div class="md:hidden flex items-center">
+                    <a href="#carrito" class="bg-secondary text-textDark p-2 rounded-full mr-4 hover:shadow-soft transition-all" aria-label="Carrito de compras" onclick="abrirMensaje('Carrito')">
+                        <i class="ph ph-shopping-cart text-lg"></i>
+                    </a>
+                    <button id="hamburger-btn" class="text-textDark hover:text-textLight focus:outline-none p-2 rounded-full transition-colors">
+                        <i class="ph ph-list text-3xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú Mobile Desplegable -->
+        <div id="mobile-menu" class="md:hidden bg-primary px-4 shadow-soft">
+            <div class="flex flex-col space-y-4 pt-2">
+                <a href="#inicio" class="block text-center text-textDark font-medium bg-gray-50 py-3 rounded-full hover:bg-secondary transition-colors mobile-link">Inicio</a>
+                <a href="#novedades" class="block text-center text-textDark font-medium bg-gray-50 py-3 rounded-full hover:bg-secondary transition-colors mobile-link">Novedades</a>
+                <a href="#productos" class="block text-center text-textDark font-medium bg-gray-50 py-3 rounded-full hover:bg-secondary transition-colors mobile-link">Productos</a>
+                <a href="#nosotros" class="block text-center text-textDark font-medium bg-gray-50 py-3 rounded-full hover:bg-secondary transition-colors mobile-link">Nosotros</a>
+                <a href="#contacto" class="block text-center text-textDark font-medium bg-gray-50 py-3 rounded-full hover:bg-secondary transition-colors mobile-link">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- INICIO / HERO SECTION -->
+    <section id="inicio" class="relative bg-secondary overflow-hidden pb-16 pt-10 lg:pt-20 lg:pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Texto Hero -->
+                <div class="text-center lg:text-left">
+                    <span class="inline-block py-1 px-4 rounded-full bg-primary text-sm font-semibold shadow-soft mb-4">Nueva Colección 2026</span>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-textDark">
+                        Estilo único para tu <span class="text-tertiary drop-shadow-sm">engreído</span>
+                    </h1>
+                    <p class="text-lg text-textLight mb-8 max-w-lg mx-auto lg:mx-0">
+                        Unimos la comodidad que buscas con prendas fuera de lo convencional. Ropa de todas las tallas que refleja tu estilo, combinando ternura y originalidad.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#productos" class="inline-block bg-textDark text-primary font-medium px-8 py-4 rounded-full shadow-soft hover:shadow-soft-lg hover:-translate-y-1 transition-all text-center">
+                            Ver Colección
+                        </a>
+                        <a href="#grupo-vip" class="inline-flex items-center justify-center gap-2 bg-primary border-2 border-textDark text-textDark font-medium px-8 py-4 rounded-full shadow-soft hover:bg-green-50 transition-all text-center" onclick="abrirMensaje('Unirse a grupo de WhatsApp VIP')">
+                            <i class="ph-fill ph-whatsapp logo text-green-500 text-xl"></i>
+                            Únete al VIP
+                        </a>
+                    </div>
+                </div>
+                <!-- Imagen Hero -->
+                <div class="relative">
+                    <div class="absolute inset-0 bg-neutral rounded-[3rem] rotate-3 scale-105 -z-10 opacity-70"></div>
+                    <div class="w-full h-80 md:h-[450px] bg-tertiary rounded-[3rem] shadow-soft-lg flex items-center justify-center overflow-hidden border-4 border-primary relative">
+                        <div class="text-center p-6 bg-white/50 rounded-2xl backdrop-blur-sm m-6 border border-white/60">
+                            <span class="text-textLight font-medium"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOVEDADES (LIVE TIKTOK) -->
+    <section id="novedades" class="py-20 bg-primary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold text-textDark mb-2 flex items-center gap-2">
+                        <i class="ph-fill ph-sparkle text-neutral"></i> Novedades de la Semana
+                    </h2>
+                    <p class="text-textLight">Vistos en nuestro último TikTok Live. ¡Stock limitado!</p>
+                </div>
+                <a href="#tiktok" class="hidden sm:inline-flex items-center gap-2 text-textDark font-medium bg-neutral/30 px-6 py-2 rounded-full hover:bg-neutral/50 transition-colors" onclick="abrirMensaje('Abrir TikTok')">
+                    <i class="ph-fill ph-tiktok logo"></i> Ver Live Replay
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Tarjeta Novedad 1 -->
+                <div class="bg-white rounded-[2rem] p-4 shadow-soft hover:shadow-soft-lg transition-shadow">
+                    <div class="h-64 bg-tertiary/40 rounded-3xl mb-4 flex items-center justify-center relative overflow-hidden">
+                        <span class="absolute top-4 left-4 bg-red-400 text-white text-xs font-bold px-3 py-1 rounded-full">-20% Hoy</span>
+                        <div class="text-center p-4 text-sm text-textLight"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Arnés "Galaxia"</h3>
+                    <p class="text-textLight text-sm mb-4">Stock: Quedan 3 en talla M</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold">S/ 45.00</span>
+                        <a href="#comprar" class="bg-neutral text-textDark px-5 py-2 rounded-full font-medium hover:bg-textDark hover:text-primary transition-colors" onclick="abrirMensaje('Añadir al carrito')">Lo quiero</a>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Novedad 2 -->
+                <div class="bg-white rounded-[2rem] p-4 shadow-soft hover:shadow-soft-lg transition-shadow">
+                    <div class="h-64 bg-secondary/60 rounded-3xl mb-4 flex items-center justify-center relative overflow-hidden">
+                        <span class="absolute top-4 left-4 bg-textDark text-white text-xs font-bold px-3 py-1 rounded-full">Exclusivo</span>
+                        <div class="text-center p-4 text-sm text-textLight"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Polera Oversize "Chill"</h3>
+                    <p class="text-textLight text-sm mb-4">Todas las tallas disponibles</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold">S/ 55.00</span>
+                        <a href="#comprar" class="bg-neutral text-textDark px-5 py-2 rounded-full font-medium hover:bg-textDark hover:text-primary transition-colors" onclick="abrirMensaje('Añadir al carrito')">Lo quiero</a>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Novedad 3 -->
+                <div class="bg-white rounded-[2rem] p-4 shadow-soft hover:shadow-soft-lg transition-shadow">
+                    <div class="h-64 bg-neutral/40 rounded-3xl mb-4 flex items-center justify-center relative overflow-hidden">
+                        <span class="absolute top-4 left-4 bg-tertiary text-textDark text-xs font-bold px-3 py-1 rounded-full">Próximo Lanzamiento</span>
+                        <div class="text-center p-4 text-sm text-textLight"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Set Bandana + Lentes</h3>
+                    <p class="text-textLight text-sm mb-4">Disponible el viernes. ¡Reserva!</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold">S/ 30.00</span>
+                        <a href="#comprar" class="bg-secondary text-textDark px-5 py-2 rounded-full font-medium hover:bg-textDark hover:text-primary transition-colors" onclick="abrirMensaje('Reservar producto')">Reservar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTOS Y SERVICIOS -->
+    <section id="productos" class="py-20 bg-tertiary/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-textDark mb-4">Catálogo de Productos</h2>
+                <p class="text-textLight max-w-2xl mx-auto">Encuentra la categoría ideal para el rey o reina de la casa. Diseños cómodos, materiales premium y cortes que no limitan su movimiento.</p>
+            </div>
+
+            <!-- Filtros (Mockup) -->
+            <div class="flex overflow-x-auto no-scrollbar gap-4 justify-start md:justify-center mb-10 pb-2">
+                <button class="bg-textDark text-primary px-6 py-2 rounded-full font-medium whitespace-nowrap shadow-soft">Todos</button>
+                <button class="bg-white text-textDark border border-gray-200 px-6 py-2 rounded-full font-medium hover:bg-secondary whitespace-nowrap transition-colors">Ropa de Invierno</button>
+                <button class="bg-white text-textDark border border-gray-200 px-6 py-2 rounded-full font-medium hover:bg-secondary whitespace-nowrap transition-colors">Arneses</button>
+                <button class="bg-white text-textDark border border-gray-200 px-6 py-2 rounded-full font-medium hover:bg-secondary whitespace-nowrap transition-colors">Accesorios</button>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Producto 1 -->
+                <div class="bg-white rounded-[2rem] p-3 shadow-soft group cursor-pointer" onclick="abrirDetalle('Chaqueta Impermeable', 'S/ 65.00')">
+                    <div class="h-40 md:h-48 bg-primary rounded-3xl mb-3 flex items-center justify-center group-hover:bg-secondary/40 transition-colors">
+                         <div class="text-center p-2 text-xs text-textLight"></div>
+                    </div>
+                    <div class="px-2">
+                        <h4 class="font-semibold text-sm md:text-base truncate">Chaqueta Amarilla</h4>
+                        <p class="text-textLight text-xs mb-2">Ropa</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-sm md:text-base">S/ 65.00</span>
+                            <button class="bg-tertiary text-textDark w-8 h-8 rounded-full flex items-center justify-center hover:bg-textDark hover:text-primary transition-colors"><i class="ph ph-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="bg-white rounded-[2rem] p-3 shadow-soft group cursor-pointer" onclick="abrirDetalle('Arnés de Paseo Confort', 'S/ 40.00')">
+                    <div class="h-40 md:h-48 bg-primary rounded-3xl mb-3 flex items-center justify-center group-hover:bg-secondary/40 transition-colors">
+                         <div class="text-center p-2 text-xs text-textLight"></div>
+                    </div>
+                    <div class="px-2">
+                        <h4 class="font-semibold text-sm md:text-base truncate">Arnés Confort</h4>
+                        <p class="text-textLight text-xs mb-2">Arneses</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-sm md:text-base">S/ 40.00</span>
+                            <button class="bg-tertiary text-textDark w-8 h-8 rounded-full flex items-center justify-center hover:bg-textDark hover:text-primary transition-colors"><i class="ph ph-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="bg-white rounded-[2rem] p-3 shadow-soft group cursor-pointer" onclick="abrirDetalle('Corbata Michi Elegante', 'S/ 15.00')">
+                    <div class="h-40 md:h-48 bg-primary rounded-3xl mb-3 flex items-center justify-center group-hover:bg-secondary/40 transition-colors">
+                         <div class="text-center p-2 text-xs text-textLight"></div>
+                    </div>
+                    <div class="px-2">
+                        <h4 class="font-semibold text-sm md:text-base truncate">Michi Elegante</h4>
+                        <p class="text-textLight text-xs mb-2">Accesorios</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-sm md:text-base">S/ 15.00</span>
+                            <button class="bg-tertiary text-textDark w-8 h-8 rounded-full flex items-center justify-center hover:bg-textDark hover:text-primary transition-colors"><i class="ph ph-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="bg-white rounded-[2rem] p-3 shadow-soft group cursor-pointer" onclick="abrirDetalle('Pijama de Osos', 'S/ 50.00')">
+                    <div class="h-40 md:h-48 bg-primary rounded-3xl mb-3 flex items-center justify-center group-hover:bg-secondary/40 transition-colors">
+                         <div class="text-center p-2 text-xs text-textLight"></div>
+                    </div>
+                    <div class="px-2">
+                        <h4 class="font-semibold text-sm md:text-base truncate">Pijama Osos</h4>
+                        <p class="text-textLight text-xs mb-2">Ropa</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-sm md:text-base">S/ 50.00</span>
+                            <button class="bg-tertiary text-textDark w-8 h-8 rounded-full flex items-center justify-center hover:bg-textDark hover:text-primary transition-colors"><i class="ph ph-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="#ver-mas" class="inline-block bg-white border border-gray-200 text-textDark font-medium px-8 py-3 rounded-full shadow-soft hover:bg-gray-50 transition-colors" onclick="abrirMensaje('Cargar más productos')">Ver catálogo completo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOSOTROS / EMPRESA -->
+    <section id="nosotros" class="py-20 bg-primary overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Fotos interactivas de engreidos -->
+                <div class="relative h-[400px] lg:h-[500px]">
+                    <div class="absolute top-0 left-0 w-2/3 h-2/3 bg-neutral rounded-[3rem] shadow-soft flex items-center justify-center rotate-[-4deg] hover:rotate-0 transition-transform duration-500 z-20 border-4 border-white">
+                         <div class="text-center p-4 text-sm text-textDark font-medium"></div>
+                    </div>
+                    <div class="absolute bottom-0 right-0 w-2/3 h-2/3 bg-secondary rounded-[3rem] shadow-soft flex items-center justify-center rotate-[6deg] hover:rotate-0 transition-transform duration-500 z-10 border-4 border-white">
+                         <div class="text-center p-4 text-sm text-textDark font-medium"></div>
+                    </div>
+                </div>
+
+                <!-- Textos -->
+                <div>
+                    <h2 class="text-3xl font-bold text-textDark mb-6">Nuestra Historia y Misión</h2>
+                    <p class="text-textLight mb-4 leading-relaxed">
+                        Nacimos de la necesidad de encontrar ropa que no solo sea "linda", sino verdaderamente cómoda para nuestros mejores amigos. Creemos que cada mascota tiene su propia personalidad y merece reflejarla sin comprometer su movilidad.
+                    </p>
+                    <p class="text-textLight mb-8 leading-relaxed">
+                        Nuestra misión es combinar ternura, autenticidad y calidad excepcional en cada costura. 
+                    </p>
+                    
+                    <!-- Botón interactivo Guía de Tallas -->
+                    <div class="bg-white p-6 rounded-[2rem] shadow-soft border border-gray-100">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="bg-tertiary w-12 h-12 rounded-full flex items-center justify-center text-textDark">
+                                <i class="ph ph-ruler text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">¿No sabes qué talla pedir?</h3>
+                                <p class="text-sm text-textLight">Usa nuestra guía interactiva de medidas.</p>
+                            </div>
+                        </div>
+                        <button onclick="toggleTablaTallas()" class="w-full bg-neutral text-textDark py-3 rounded-full font-medium hover:bg-neutral/80 transition-colors">
+                            Ver Tabla de Tallas
+                        </button>
+
+                        <!-- Tabla oculta que se muestra con JS -->
+                        <div id="tabla-tallas" class="hidden mt-4 overflow-x-auto">
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-xs text-textLight uppercase bg-gray-50 rounded-t-xl">
+                                    <tr>
+                                        <th class="px-4 py-3 rounded-tl-xl">Talla</th>
+                                        <th class="px-4 py-3">Pecho (cm)</th>
+                                        <th class="px-4 py-3">Cuello (cm)</th>
+                                        <th class="px-4 py-3 rounded-tr-xl">Largo (cm)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-white border-b">
+                                        <td class="px-4 py-3 font-bold">XS</td>
+                                        <td class="px-4 py-3">25 - 30</td>
+                                        <td class="px-4 py-3">18 - 22</td>
+                                        <td class="px-4 py-3">20</td>
+                                    </tr>
+                                    <tr class="bg-white border-b">
+                                        <td class="px-4 py-3 font-bold">S</td>
+                                        <td class="px-4 py-3">31 - 36</td>
+                                        <td class="px-4 py-3">23 - 27</td>
+                                        <td class="px-4 py-3">25</td>
+                                    </tr>
+                                    <tr class="bg-white border-b">
+                                        <td class="px-4 py-3 font-bold">M</td>
+                                        <td class="px-4 py-3">37 - 44</td>
+                                        <td class="px-4 py-3">28 - 32</td>
+                                        <td class="px-4 py-3">30</td>
+                                    </tr>
+                                    <tr class="bg-white">
+                                        <td class="px-4 py-3 font-bold rounded-bl-xl">L</td>
+                                        <td class="px-4 py-3">45 - 52</td>
+                                        <td class="px-4 py-3">33 - 38</td>
+                                        <td class="px-4 py-3 rounded-br-xl">35</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS (Mencionado en inicio) -->
+    <section class="py-16 bg-neutral">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold text-textDark mb-10">Clientes Felices</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-[2rem] shadow-soft text-left">
+                    <div class="flex text-yellow-400 mb-3"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div>
+                    <p class="text-textLight text-sm mb-4">"A mi perrita Luna le encantó su casaca, la talla M le quedó perfecta gracias a la guía de medidas. Súper recomendados."</p>
+                    <p class="font-bold text-sm text-textDark">- Andrea Gómez</p>
+                </div>
+                <div class="bg-white p-6 rounded-[2rem] shadow-soft text-left mt-0 md:mt-6">
+                    <div class="flex text-yellow-400 mb-3"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div>
+                    <p class="text-textLight text-sm mb-4">"El diseño de las ropas es fuera de lo común. Mi gato odiaba la ropa, pero este material es tan suave que ni lo siente."</p>
+                    <p class="font-bold text-sm text-textDark">- Carlos Ruiz</p>
+                </div>
+                <div class="bg-white p-6 rounded-[2rem] shadow-soft text-left mt-0 md:mt-12">
+                    <div class="flex text-yellow-400 mb-3"><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i></div>
+                    <p class="text-textLight text-sm mb-4">"Entré al grupo VIP por una promoción y la atención por WhatsApp es súper rápida y amigable. ¡10/10!"</p>
+                    <p class="font-bold text-sm text-textDark">- María Fernanda</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO Y FOOTER -->
+    <footer id="contacto" class="bg-textDark pt-16 pb-8 text-primary rounded-t-[3rem] mt-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Info -->
+                <div class="lg:col-span-2">
+                    <a href="#inicio" class="text-2xl font-bold flex items-center gap-2 mb-4">
+                        <i class="ph-fill ph-paw-print text-tertiary text-3xl"></i>
+                        Kanino Auténtiko
+                    </a>
+                    <p class="text-gray-400 mb-6 max-w-sm">
+                        Moda original y cómoda para mascotas. Resolvemos todas tus dudas rápidamente.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#ig" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-xl hover:bg-tertiary hover:text-textDark transition-colors" aria-label="Instagram" onclick="abrirMensaje('Instagram')"><i class="ph-fill ph-instagram-logo"></i></a>
+                        <a href="#tk" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-xl hover:bg-neutral hover:text-textDark transition-colors" aria-label="TikTok" onclick="abrirMensaje('TikTok')"><i class="ph-fill ph-tiktok-logo"></i></a>
+                        <a href="#fb" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-xl hover:bg-secondary hover:text-textDark transition-colors" aria-label="Facebook" onclick="abrirMensaje('Facebook')"><i class="ph-fill ph-facebook-logo"></i></a>
+                    </div>
+                </div>
+
+                <!-- Enlaces -->
+                <div>
+                    <h4 class="font-bold mb-4 text-lg text-white">Enlaces Rápidos</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#inicio" class="hover:text-tertiary transition-colors">Inicio</a></li>
+                        <li><a href="#productos" class="hover:text-tertiary transition-colors">Catálogo de Ropa</a></li>
+                        <li><a href="#nosotros" class="hover:text-tertiary transition-colors">Sobre Nosotros</a></li>
+                        <li><a href="#faqs" class="hover:text-tertiary transition-colors" onclick="abrirMensaje('Preguntas Frecuentes')">Preguntas Frecuentes</a></li>
+                        <li><a href="#envios" class="hover:text-tertiary transition-colors" onclick="abrirMensaje('Política de Envíos')">Gestión de Envíos</a></li>
+                    </ul>
+                </div>
+
+                <!-- Chat WhatsApp Directo -->
+                <div>
+                    <h4 class="font-bold mb-4 text-lg text-white">¿Tienes dudas?</h4>
+                    <p class="text-gray-400 text-sm mb-4">Escríbenos directamente, te responderemos al instante.</p>
+                    <a href="https://wa.me/123456789?text=Hola,%20quisiera%20consultar%20sobre%20una%20prenda%20para%20mi%20mascota" target="_blank" class="w-full bg-green-500 hover:bg-green-400 text-textDark font-bold py-3 px-4 rounded-full flex items-center justify-center gap-2 transition-colors">
+                        <i class="ph-fill ph-whatsapp-logo text-2xl"></i>
+                        Chat en WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2026 Kanino Auténtiko. Todos los derechos reservados.</p>
+                <div class="flex gap-4 text-sm text-gray-500">
+                    <a href="#privacidad" class="hover:text-white transition-colors" onclick="abrirMensaje('Políticas de Privacidad')">Privacidad</a>
+                    <a href="#terminos" class="hover:text-white transition-colors" onclick="abrirMensaje('Términos y Condiciones')">Términos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE WHATSAPP (FAB) -->
+    <a href="https://wa.me/123456789?text=Hola,%20quiero%20unirme%20al%20grupo%20VIP" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-soft-lg hover:scale-110 hover:bg-green-400 transition-all z-50 animate-bounce" aria-label="WhatsApp Contacto">
+        <i class="ph-fill ph-whatsapp-logo"></i>
+    </a>
+
+    <!-- MENSAJE MODAL PARA ENLACES SIMULADOS -->
+    <div id="mock-modal" class="fixed inset-0 bg-textDark/40 backdrop-blur-sm z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-300">
+        <div class="bg-white p-8 rounded-[2rem] shadow-soft-lg max-w-sm w-full mx-4 transform scale-95 transition-transform duration-300" id="modal-content">
+            <div class="w-16 h-16 bg-secondary text-textDark rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                <i class="ph-fill ph-info"></i>
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2" id="modal-title">Acción Simulada</h3>
+            <p class="text-textLight text-center mb-6 text-sm">Has hecho clic en un enlace de demostración: <strong id="modal-action-name"></strong></p>
+            <button onclick="cerrarMensaje()" class="w-full bg-textDark text-primary py-3 rounded-full font-medium hover:bg-gray-800 transition-colors">
+                Entendido
+            </button>
+        </div>
+    </div>
+
+
+    <!-- SCRIPTS INTERACTIVIDAD -->
+    <script>
+        // --- 1. Lógica del Menú Hamburguesa Fluido ---
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.add('open');
+                // Cambiar icono a 'X'
+                menuIcon.classList.remove('ph-list');
+                menuIcon.classList.add('ph-x');
+            } else {
+                mobileMenu.classList.remove('open');
+                // Cambiar icono a 'Hamburguesa'
+                menuIcon.classList.remove('ph-x');
+                menuIcon.classList.add('ph-list');
+            }
+        }
+
+        hamburgerBtn.addEventListener('click', toggleMenu);
+
+        // Cerrar menú al hacer clic en un enlace (con suavidad)
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) toggleMenu();
+            });
+        });
+
+        // --- 2. Tabla Interactiva de Tallas ---
+        const tablaTallas = document.getElementById('tabla-tallas');
+        function toggleTablaTallas() {
+            if (tablaTallas.classList.contains('hidden')) {
+                tablaTallas.classList.remove('hidden');
+                // Pequeña animación de opacidad
+                tablaTallas.style.opacity = '0';
+                setTimeout(() => {
+                    tablaTallas.style.transition = 'opacity 0.5s ease';
+                    tablaTallas.style.opacity = '1';
+                }, 10);
+            } else {
+                tablaTallas.classList.add('hidden');
+            }
+        }
+
+        // --- 3. Lógica para los Detalles de Producto (Modal Simple) ---
+        function abrirDetalle(nombre, precio) {
+            const titulo = document.getElementById('modal-title');
+            const accionName = document.getElementById('modal-action-name');
+            titulo.innerText = "Detalle de Producto";
+            accionName.innerText = `Abriendo: ${nombre} (${precio})`;
+            mostrarModal();
+        }
+
+        // --- 4. Sistema de Mensajes Simulados (Para botones que van a otras direcciones) ---
+        const modal = document.getElementById('mock-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function abrirMensaje(accion) {
+            const titulo = document.getElementById('modal-title');
+            const accionName = document.getElementById('modal-action-name');
+            titulo.innerText = "Redirección / Acción";
+            accionName.innerText = accion;
+            mostrarModal();
+        }
+
+        function mostrarModal() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // Timeout para permitir que el display:flex se aplique antes de animar opacidad
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function cerrarMensaje() {
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300); // Esperar que termine la transición en CSS (duration-300)
+        }
+    </script>
+</body>
+</html>
